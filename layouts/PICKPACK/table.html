@@ -14,7 +14,7 @@
   
   
 
-  <link rel="stylesheet" href="./extra/css/tab_style.css">
+  <link rel="stylesheet" href="./css/tab_style.css">
 
 
 
@@ -26,50 +26,9 @@
   <link href="css/style.css" rel="stylesheet">
 
 <style>
-.dropbtn {
-  background-color: #0078ff;
-  width: 200px;
-  color: white;
-  padding: 8px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
-
-.dropbtn:hover, .dropbtn:focus {
-  background-color: #2980B9;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  width: 400px;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
 
 
-.dropdown a:hover {background-color: #ddd;}
 
-.show {display: block;}
-
-
-}
 
 </style>
 
@@ -109,7 +68,7 @@
         <ul class="navbar-nav">
           <li>
           	<div class="dropdown">
-			  <button onclick="myFunction()" class="dropbtn">REQUESTS</button>
+			  <button onclick="myDropFunc()" class="dropbtn" style="border-radius: 4px;">REQUESTS</button>
 			  <div id="myDropdown" class="dropdown-content">
 			    <table style="width: 100%">
 					  <tr>
@@ -120,17 +79,17 @@
 					  <tr >
 					    <td>Alfreds</td>
 					    <td>Maria Anders</td>
-					    <td><input type="checkbox" id="myCheck"  onclick="myFunction()"></td>
+					    <td>snds</td>
 					  </tr>
 					  <tr>
 					    <td>Centro </td>
 					    <td>Francisco</td>
-					    <td><input type="checkbox" id="myCheck"  onclick="myFunction()"></td>
+					    <td>sncnskncsk</td>
 					  </tr>
 					  <tr>
 					    <td>Centro </td>
 					    <td>Francisco</td>
-					    <td><input type="checkbox" id="myCheck"  onclick="myFunction()"></td>
+					    <td>scnkscnsk</td>
 					  </tr>
 				</table>
 
@@ -169,7 +128,7 @@
 			  	</div>
         </div>
         	  
-        	  <a href="./user.html"><button class="button button-a  button-rouded "><b>+</b></button></a>
+        	  <button class="button button-a  button-rouded "><b>+</b></button>
         	  
         <div class="tb_search">
 
@@ -346,10 +305,6 @@
 
 
 
-
-
-
-
 </div>
 
 
@@ -368,30 +323,9 @@
 
   
 
-    <script  src="./extra/js/tab_js.js"></script>
+ <script  src="./js/tab_js.js"></script>
 
 
-<script>
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
-</script>
 
 
 
