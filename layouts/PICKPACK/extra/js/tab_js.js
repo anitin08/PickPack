@@ -1,6 +1,6 @@
   getPagination('#table-id');
 	$('#maxRows').trigger('change');
-	function getPagination (table){
+	 function getPagination (table){
 
 		  $('#maxRows').on('change',function(){
 		  	$('.pagination').html('');						// reset pagination div
@@ -15,10 +15,11 @@
 			 		$(this).hide();							// fade it out 
 			 	}if (trnum <= maxRows ){$(this).show();}// else fade in Important in case if it ..
 			 });											//  was fade out to fade it in 
-			 if (totalRows > maxRows){						// if tr total rows gt max rows option
+			 if (totalRows > maxRows)
+      {						// if tr total rows gt max rows option
 			 	var pagenum = Math.ceil(totalRows/maxRows);	// ceil total(rows/maxrows) to get ..  
 			 												//	numbers of pages 
-			 	for (var i = 1; i <= pagenum ;){			// for each page append pagination li 
+			  	for (var i = 1; i <= pagenum ;){			// for each page append pagination li 
 			 	$('.pagination').append('<li data-page="'+i+'">\
 								      <span>'+ i++ +'<span class="sr-only">(current)</span></span>\
 								    </li>').show();
@@ -83,11 +84,11 @@ function showig_rows_count(maxRows, pageNum, totalRows) {
 
 // CREATING INDEX
 function default_index() {
-  $('table tr:eq(0)').prepend('<th> ID </th>')
+  $('table#table-id tr:eq(0)').prepend('<th> Item_No </th>')
 
 					var id = 0;
 
-					$('table tr:gt(0)').each(function(){	
+					$('table#table-id tr:gt(0)').each(function(){	
 						id++
 						$(this).prepend('<td>'+id+'</td>');
 					});
