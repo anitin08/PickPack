@@ -3,11 +3,18 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Pagination table with search option</title>
+  <title>Pagination -- with search option</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicons -->
+  <link href="img/myicon.png" rel="icon">
+  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
   
   
 
-      <link rel="stylesheet" href="./extra/css/tab_style.css">
+  <link rel="stylesheet" href="./extra/css/tab_style.css">
 
 
 
@@ -91,7 +98,7 @@
 <!--/ Nav Star /-->
   <nav class="navbar navbar-b navbar-trans navbar-expand-md fixed-top" id="mainNav" style="background-color: white; padding: 10px;">
     <div class="container">
-      <a class="navbar-brand js-scroll" href="#page-top" style="color: blue">PickPack</a>
+      <a class="navbar-brand js-scroll" href="#page-top" style="color:#0078ff ">PickPack</a>
       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault"
         aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span></span>
@@ -113,17 +120,17 @@
 					  <tr >
 					    <td>Alfreds</td>
 					    <td>Maria Anders</td>
-					    <td>Germany</td>
+					    <td><input type="checkbox" id="myCheck"  onclick="myFunction()"></td>
 					  </tr>
 					  <tr>
 					    <td>Centro </td>
 					    <td>Francisco</td>
-					    <td>Mexico</td>
+					    <td><input type="checkbox" id="myCheck"  onclick="myFunction()"></td>
 					  </tr>
 					  <tr>
 					    <td>Centro </td>
 					    <td>Francisco</td>
-					    <td>Mexico</td>
+					    <td><input type="checkbox" id="myCheck"  onclick="myFunction()"></td>
 					  </tr>
 				</table>
 
@@ -161,12 +168,15 @@
 					</select>	
 			  	</div>
         </div>
-        	
+        	  
+        	  <a href="./user.html"><button class="button button-a  button-rouded "><b>+</b></button></a>
+        	  
         <div class="tb_search">
-<input type="text" id="search_input_all" onkeyup="FilterkeyWord_all_table()" placeholder="Search.." class="form-control">
+
+               <input type="text" id="search_input_all" onkeyup="FilterkeyWord_all_table()" placeholder="Search.." class="form-control">
         </div>
       </div>
-<table class="table table-striped table-class" id= "table-id">
+<table class="table table-striped table-class" id= "table-id" name="table-nm ">
   	
 <thead>
 <tr>
