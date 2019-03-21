@@ -155,7 +155,15 @@ function myDropFunc() {
 
 // Close the dropdown if the user clicks outside of it
 
+ 
+/*
+function for new entry
 
+*/ 
+
+function newenteryFunc() {
+  document.getElementById("mynewentry").classList.toggle("show");
+}
 
 
 
