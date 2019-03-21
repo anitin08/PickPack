@@ -14,7 +14,8 @@
 			 		
 			 		$(this).hide();							// fade it out 
 			 	}if (trnum <= maxRows ){$(this).show();}// else fade in Important in case if it ..
-			 });											//  was fade out to fade it in 
+			 });
+       											//  was fade out to fade it in 
 			 if (totalRows > maxRows)
       {						// if tr total rows gt max rows option
 			 	var pagenum = Math.ceil(totalRows/maxRows);	// ceil total(rows/maxrows) to get ..  
@@ -26,12 +27,52 @@
 			 	}											// end for i 
      
          
-			} 												// end if row count > max rows
-			$('.pagination li:first-child').addClass('active'); // add active class to the first li 
+			} 	
+
+
+
+
+
+// .............................DEFAULT PAGE SHOWING START...............................................
+
+
+        var pageNum = pagenum;
+        var trIndex = 0 ;             // reset tr counter
+       // $('.pagination li').removeClass('active');  // remove active class from all li 
+       // $(this).addClass('active');         // add active class to the clicked 
+        
+        
+        //SHOWING ROWS NUMBER OUT OF TOTAL
+       showig_rows_count(maxRows, pageNum, totalRows);
+        //SHOWING ROWS NUMBER OUT OF TOTAL
+        
+        
+        
+         $(table+' tr:gt(0)').each(function(){    // each tr in table not the header
+          trIndex++;       // tr index counter 
+          // if tr index gt maxRows*pageNum or lt maxRows*pageNum-maxRows fade if out
+          if (trIndex >((maxRows*pageNum)-maxRows)){
+            $(this).show();   
+          }else {$(this).hide();} 
+                   //else fade in 
+         });                    // end of for each tr in table
+
+
+
+
+
+// .............................DEFAULT PAGE SHOWING  END...............................................
+
+
+
+
+
+      											// end if row count > max rows
+			$('.pagination li:last-child').addClass('active'); // add active class to the first li 
         
         
         //SHOWING ROWS NUMBER OUT OF TOTAL DEFAULT
-       showig_rows_count(maxRows, 1, totalRows);
+      // showig_rows_count(maxRows, pagenum, totalRows);
         //SHOWING ROWS NUMBER OUT OF TOTAL DEFAULT
 
         $('.pagination li').on('click',function(e){		// on click each page
