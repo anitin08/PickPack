@@ -47,11 +47,25 @@
       </button>
       <div class="navbar-collapse collapse justify-content-end" id="navbarDefault">
         <ul class="navbar-nav">
+	        <li class="nav-item">
+	            <div class="nav-link js-scroll" id="latestuser" style="color: #0078ff " >
+	            <% String username=request.getParameter("username");
+	     		if(username==null)
+	            username=(String)session.getAttribute("username");
+	            out.print("Welcome "+username);
+	            session.setAttribute("username",username);%>
+	            </div>
+          </li>
           <li>
           	<div class="dropdown">
-			  <button onclick="myDropFunc()" class="dropbtn" style="border-radius: 4px;">REQUESTS</button>
+			  <button onclick="myDropFunc(); myAjax()" class="dropbtn" style="border-radius: 4px;">REQUESTS</button>
 			  <div id="myDropdown" class="dropdown-content">
-			    <table style="width: 100%">
+			  
+			  
+			  
+			  
+			  
+			    <table id="reqtab" style="width: 100%">
 					  <tr>
 					    <th>Name</th>
 					    <th>TrackId</th>
@@ -63,7 +77,7 @@
 					    <td><img src="./img/tick_mark_icon.png" width="25" height="25"></td>
 					  </tr>
 					  
-					  
+					 
 					  
 					  <c:forEach var="dat" items="${returnedlist}">
 						<tr>
@@ -75,6 +89,11 @@
 	
 					 
 				</table>
+				
+				
+				
+				
+				
 
 			  </div>
 			</div>
@@ -82,9 +101,7 @@
           <li class="nav-item">
             <a class="nav-link js-scroll active" href="${pageContext.request.contextPath}/login" style="color: #0078ff" >Logout</a>
           </li>
-          <li class="nav-item">
-            <div class="nav-link js-scroll"  style="color: #0078ff " >${user}</div>
-          </li>
+          
         </ul>
       </div>
     </div>
@@ -121,7 +138,7 @@
 			  <div id="mynewentry" class="dropdown-content" style="background-color: #000000">
 
 				    <form:form action="/createrecord" method="post" role="form" modelAttribute="addrecordform" >
-				    		<div style="color:white"> ${ans}</div>
+				    		
 						  <form:input type="text"  path="track_id" placeholder="TrackingId" style="width: 100%" required="required"/>
 						  <form:input type="text"  path="name" placeholder="Name" style="width: 100%" required="required"/>
 						  <form:input list="hosting-plan" type="text" path="comp_name" placeholder="Company" style="width: 100%" required="required"/>
@@ -134,8 +151,10 @@
 	                </form:form>
 
 			  </div>
+			  <div style="color:red"> ${ans}</div>
 		</div>
-
+			
+		
 	  
         <div class="tb_search">
 
@@ -202,6 +221,56 @@
     if ( window.history.replaceState ) {
         window.history.replaceState( null, null, window.location.href );
     }
+	</script>
+	
+	
+	<script >
+	function myAjax() {
+	    $.ajax({
+	    dataType: "json",
+	    method: "GET",
+	    url: '/getrequests',
+	    success: function (result) {
+	    	//alert(result);
+	    	//var newres = JSON.parse(result);
+	    	
+	    	//result=JSON.parse(resul);
+	    	
+	    	if(result!=null){
+	    		//alert(result);
+	    		$('#reqtab tr:gt(0)').remove();
+                var len = result.length;
+                var txt = "";
+                var test= "";
+                //if(len > 0){
+                    for(var i=0;i<len;i++){
+                        //if(result[i].name && data[i].trackid){
+                            txt += "<tr><td>"+result[i].name+"</td><td>"+result[i].trackid+"</td><td><img src="+"'./img/tick_mark_icon.png'"+" width="+"'25'"+" height="+"'25'"+"></td></tr>";
+                            
+                            
+                            //test += "<tr id="+result[i].Id+"+"><td>"+result[i].name+"</td><td>"+result[i].trackid+"</td><td><img src="+"'./img/tick_mark_icon.png'"+" width="+"'25'"+" height="+"'25'"+"></td></tr>";
+                           // <td><img src="+"'./img/tick_mark_icon.png'"+" width="+"'25'"+" height="+"'25'"+  +"></td>
+                        //}
+                    }
+                   
+                    //if(txt != ""){
+                        $("#reqtab").append(txt);
+                    //}
+                      
+                //}
+            }
+	    	
+	
+		    	
+	    },
+	    error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.status + ' ' + jqXHR.responseText);
+        }
+	    
+	    
+	    
+	  });
+	  }
 	</script>
 	
 	

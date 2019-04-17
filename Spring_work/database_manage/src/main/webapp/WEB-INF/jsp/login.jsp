@@ -89,7 +89,7 @@
 							
 							<div style="color:#ff5400"> ${nouser}</div>
 							<div class="col-md-12 mb-3">
-                            	<form:input path="username" placeholder="Enter Username" class="form-control" required="true"/>
+                            	<form:input path="username" name="username" placeholder="Enter Username" class="form-control" required="true"/>
 	                        </div>
 	                        
 	                        <div class="col-md-12 mb-3">

@@ -32,12 +32,14 @@ public class RequestService {
     	List<RecordTable>result=recordRepo.findBytracking_idAndname(requestEntity.trackid, requestEntity.name);
     	if(result.size()>0)
     	{
+    		String returntid;
     		while(result.size()!=0)
     		{
     			RecordTable temp=result.remove(0);
     			temp.setStatus("Picked");
     			//temp.setPickedTime(new Date())
     			//temp.getItem_no()
+    			returntid=temp.getTrack_id();   ////this tid should be sent to ajax call
     			recordRepo.save(temp);
     		}
     		requestRepo.delete(requestEntity);
@@ -50,28 +52,4 @@ public class RequestService {
     	return false;
     }
  
-    /*public RequestTable updateRequest(Long Id, RequestTable requestEntity) {
-        RequestTable updatedRequest;
-        Optional<RequestTable> searchEntity = requestRepo.findById(Id);
-        if (searchEntity.isPresent()) {
-            RequestTable Request = searchEntity.get();
-            Request.setTrackid(requestEntity.getTrackid());
-            Request.setName(requestEntity.getName());
-            updatedRequest = requestRepo.save(Request);
-        } else {
-            throw new EntityNotFoundException();
-        }
-        return updatedRequest;
-    }*/
- 
-    /*public ResponseEntity<Object> deleteRequest(Long Id) {
-        Optional<RequestTable> requestEntity = requestRepo.findById(Id);
-        if (requestEntity.isPresent()) {
-            RequestTable Request = requestEntity.get();
-            requestRepo.delete(Request);
-        } else {
-            throw new EntityNotFoundException();
-        }
-        return ResponseEntity.ok().build();
-    }*/
 }
