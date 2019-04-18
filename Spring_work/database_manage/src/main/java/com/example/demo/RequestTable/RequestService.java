@@ -24,7 +24,7 @@ public class RequestService {
         return (List<RequestTable>) requestRepo.findAll();
     }
  
-    public boolean searchRecord(RequestTable requestEntity) {
+    public String searchRecord(RequestTable requestEntity) {
     	
     
     	                 //SEARCH IN RECORD REPO ON THE BASIS OF request entity
@@ -32,24 +32,24 @@ public class RequestService {
     	List<RecordTable>result=recordRepo.findBytracking_idAndname(requestEntity.trackid, requestEntity.name);
     	if(result.size()>0)
     	{
-    		String returntid;
+    		String returntrackid=null;
     		while(result.size()!=0)
     		{
     			RecordTable temp=result.remove(0);
     			temp.setStatus("Picked");
     			//temp.setPickedTime(new Date())
     			//temp.getItem_no()
-    			returntid=temp.getTrack_id();   ////this tid should be sent to ajax call
+    			returntrackid=temp.getTrack_id();   ////this tid should be sent to ajax call
     			recordRepo.save(temp);
     		}
     		requestRepo.delete(requestEntity);
-    		return true;
+    		return returntrackid;
     	 
     		
     	}
     	
 
-    	return false;
+    	return null;
     }
  
 }

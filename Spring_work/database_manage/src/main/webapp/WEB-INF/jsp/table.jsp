@@ -49,11 +49,13 @@
         <ul class="navbar-nav">
 	        <li class="nav-item">
 	            <div class="nav-link js-scroll" id="latestuser" style="color: #0078ff " >
-	            <% String username=request.getParameter("username");
+	            <% 
+	            String username=request.getParameter("username");
 	     		if(username==null)
 	            username=(String)session.getAttribute("username");
 	            out.print("Welcome "+username);
-	            session.setAttribute("username",username);%>
+	            session.setAttribute("username",username);
+	            %>
 	            </div>
           </li>
           <li>
@@ -69,7 +71,8 @@
 					  <tr>
 					    <th>Name</th>
 					    <th>TrackId</th>
-					    <th>Action</th>
+					    <th>Check</th>
+					    <th>Picked</th>
 					  </tr >
 					  <tr >
 					    <td>Alfreds</td>
@@ -78,14 +81,6 @@
 					  </tr>
 					  
 					 
-					  
-					  <c:forEach var="dat" items="${returnedlist}">
-						<tr>
-							<td>${dat.name}</td>
-							<td>${dat.trackid}</td>
-							<td><img src="./img/tick_mark_icon.png" width="25" height="25"></td>
-						</tr>
-					   </c:forEach>
 	
 					 
 				</table>
@@ -245,19 +240,32 @@
                 //if(len > 0){
                     for(var i=0;i<len;i++){
                         //if(result[i].name && data[i].trackid){
-                            txt += "<tr><td>"+result[i].name+"</td><td>"+result[i].trackid+"</td><td><img src="+"'./img/tick_mark_icon.png'"+" width="+"'25'"+" height="+"'25'"+"></td></tr>";
+                        	var name=result[i].name;
+                        	//console.log(result[i]);
+                        	var id=result[i].id;
+                        	var trackId=result[i].trackid;
+                        	
+                        	
+                            txt += "<tr><td>"+result[i].name+"</td><td>"+result[i].trackid+"</td><td><button  onclick='trackidsearch(\""+trackId+"\")' ><img src='./img/tick_mark_icon.png' width='25' height='25' /></button></td><td>"
+                            +"<form action='/searchByName' method=get><input type='hidden' name='name' value='"+name+"'/><input type='hidden' name='trackId' value='"+trackId+"'/><input type='hidden' name='id' value='"+id+"'/><button type='submit'><img src='./img/tick_mark_icon.png' width='25' height='25' /></button></form></td></tr>";
                             
                             
-                            //test += "<tr id="+result[i].Id+"+"><td>"+result[i].name+"</td><td>"+result[i].trackid+"</td><td><img src="+"'./img/tick_mark_icon.png'"+" width="+"'25'"+" height="+"'25'"+"></td></tr>";
-                           // <td><img src="+"'./img/tick_mark_icon.png'"+" width="+"'25'"+" height="+"'25'"+  +"></td>
-                        //}
+                            
+                            
+                           //2   txt += "<tr><td>"+result[i].name+"</td><td>"+result[i].trackid+"</td><td><button ><img src='./img/tick_mark_icon.png' width='25' height='25' /></button></td><td>"
+                           // +"<form action='/searchByName' method=get><input type='hidden' name='name' value='"+name+"'/><input type='hidden' name='trackId' value='"+trackId+"'/><input type='hidden' name='id' value='"+id+"'/><button type='submit'><img src='./img/tick_mark_icon.png' width='25' height='25' /></button></form></td></tr>";
+                            
+                            
+                            //1  txt += "<tr><td>"+result[i].name+"</td><td>"+result[i].trackid+"</td><td><img src='./img/tick_mark_icon.png' width='25' height='25' /></td><td>"
+                            //+"<form action='/searchByName' method=get><input type='hidden' name='name' value='"+name+"'/><input type='hidden' name='trackId' value='"+trackId+"'/><input type='hidden' name='id' value='"+id+"'/><input type='submit' value='submit'/></form></td></tr>";
+                            
+                            
                     }
                    
-                    //if(txt != ""){
+          				//appending
                         $("#reqtab").append(txt);
-                    //}
-                      
-                //}
+                        
+                  
             }
 	    	
 	
@@ -271,6 +279,61 @@
 	    
 	  });
 	  }
+	    
+	    
+	    
+	    
+	    
+	    
+	    function trackidsearch(stid){
+	    	
+	    	// Count td if you want to search on all table instead of specific column
+
+	    	  var count = $('.table').children('tbody').children('tr:first-child').children('td').length; 
+
+	    	        // Declare variables
+	    	  var input, filter, table, tr, td, i;
+	    	        
+	    	  //input = document.getElementById("search_input_all");
+	    	  var input_value =   stid; //document.getElementById("search_input_all").value;
+	    	        filter = input_value.toLowerCase();//input.value.toLowerCase();
+	    	  if(input_value !=''){
+	    	        table = document.getElementById("table-id");
+	    	        tr = table.getElementsByTagName("tr");
+
+	    	        // Loop through all table rows, and hide those who don't match the search query
+	    	        for (i = 1; i < tr.length; i++) {
+	    	          
+	    	          var flag = 0;
+	    	           
+	    	          for(j = 0; j < count; j++){
+	    	            td = tr[i].getElementsByTagName("td")[j];
+	    	            if (td) {
+	    	             
+	    	                var td_text = td.innerHTML;  
+	    	                if (td.innerHTML.toLowerCase().indexOf(filter) > -1) {
+	    	                //var td_text = td.innerHTML;  
+	    	                //td.innerHTML = 'shaban';
+	    	                  flag = 1;
+	    	                } else {
+	    	                  //DO NOTHING
+	    	                }
+	    	              }
+	    	            }
+	    	          if(flag==1){
+	    	                     tr[i].style.display = "";
+	    	          }else {
+	    	             tr[i].style.display = "none";
+	    	          }
+	    	        }
+	    	    }else {
+	    	      //RESET TABLE
+	    	      $('#maxRows').trigger('change');
+	    	    }
+	    	
+	    	
+	    }
+	
 	</script>
 	
 	
