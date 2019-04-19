@@ -29,7 +29,7 @@ public class RequestService {
     
     	                 //SEARCH IN RECORD REPO ON THE BASIS OF request entity
     	
-    	List<RecordTable>result=recordRepo.findBytracking_idAndname(requestEntity.trackid, requestEntity.name);
+    	List<RecordTable>result=recordRepo.findBytracking_id(requestEntity.trackid);
     	if(result.size()>0)
     	{
     		String returntrackid=null;
@@ -51,5 +51,18 @@ public class RequestService {
 
     	return null;
     }
+    
+    
+    public void addRemark(long id,String remark)
+    {
+    	Optional<RecordTable>retob= recordRepo.findById(id);
+    	RecordTable rt=retob.get();
+    	rt.setStatus("Picked");
+    	rt.setRemark(remark);
+    	recordRepo.save(rt);
+    	//System.out.println(id+" "+remark);
+    }
+    
+    
  
 }

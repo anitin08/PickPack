@@ -17,4 +17,8 @@ public interface RecordTableRepository extends JpaRepository<RecordTable, Long> 
 	List<RecordTable>findBytracking_id(String track_id);
 	
 	
+//	@Query("UPDATE RecordTable R set R.remark =?2, R.status='Picked' WHERE(R.item_no=?1)")
+//	RecordTable updateby_itemno(long item_no,String remark);
+	
+	
 }

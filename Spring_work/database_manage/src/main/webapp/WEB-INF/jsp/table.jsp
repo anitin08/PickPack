@@ -74,11 +74,7 @@
 					    <th>Check</th>
 					    <th>Picked</th>
 					  </tr >
-					  <tr >
-					    <td>Alfreds</td>
-					    <td>Maria Anders</td>
-					    <td><img src="./img/tick_mark_icon.png" width="25" height="25"></td>
-					  </tr>
+					  
 					  
 					 
 	
@@ -165,7 +161,8 @@
 		<th>Name</th>
 		<th>Company</th>
 		<th>Date</th>
-		<th>status</th>
+		<th>Status</th>
+		<th>Remark</th>
 	</tr>
 </thead>
 <tbody >
@@ -178,6 +175,7 @@
 			<td>${dat.comp_name}</td>
 			<td>${dat.date}</td>
 			<td>${dat.status}</td>
+			<td>${dat.remark}</td>
 			
 		</tr>
 	</c:forEach>
@@ -247,9 +245,9 @@
                         	
                         	
                             txt += "<tr><td>"+result[i].name+"</td><td>"+result[i].trackid+"</td><td><button  onclick='trackidsearch(\""+trackId+"\")' ><img src='./img/tick_mark_icon.png' width='25' height='25' /></button></td><td>"
-                            +"<form action='/searchByName' method=get><input type='hidden' name='name' value='"+name+"'/><input type='hidden' name='trackId' value='"+trackId+"'/><input type='hidden' name='id' value='"+id+"'/><button type='submit'><img src='./img/tick_mark_icon.png' width='25' height='25' /></button></form></td></tr>";
+                            +"<form action='/searchByTrack' method=get><input type='hidden' name='name' value='"+name+"'/><input type='hidden' name='trackId' value='"+trackId+"'/><input type='hidden' name='id' value='"+id+"'/><button type='submit'><img src='./img/tick_mark_icon.png' width='25' height='25' /></button></form></td></tr>";
                             
-                            
+                           
                             
                             
                            //2   txt += "<tr><td>"+result[i].name+"</td><td>"+result[i].trackid+"</td><td><button ><img src='./img/tick_mark_icon.png' width='25' height='25' /></button></td><td>"
@@ -261,7 +259,11 @@
                             
                             
                     }
-                   
+                        
+                        //txt += "<tr><td><form action='/addRemark' method=get><input  type='number' name='id' style='width:70%' /><input  type='text' name='remark' style='width:70%' /><button type='submit' style='width:95px'><img src='./img/tick_mark_icon.png' width='25' height='25' /></button></form><td></tr>"
+                   		
+                        
+                        txt += "<tr><td colspan='4'><form action='/addRemark' method=get><input  type='number' placeholder='Item Number..' name='id' style='width:140px' /><input  type='text' name='remark' placeholder='Add Remark..' style='width:140px;margin-left: 2px' /><button type='submit' style='width:100px;margin-left: 2px'><img src='./img/tick_mark_icon.png' width='25' height='25' /></button></form><td></tr>" 
           				//appending
                         $("#reqtab").append(txt);
                         

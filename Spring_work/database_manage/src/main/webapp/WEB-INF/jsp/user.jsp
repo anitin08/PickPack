@@ -88,7 +88,7 @@
                   
                       <form:form action="/user" id="userform" method="post" modelAttribute="usertable">
 							
-							
+							<div style="color:red"> ${failure}</div>
 							<div style="color:#00ff43"> ${success}</div>
 							<div class="col-md-12 mb-3">
                             	<form:input path="name" placeholder="Enter Full Name" class="form-control" required="true"/>

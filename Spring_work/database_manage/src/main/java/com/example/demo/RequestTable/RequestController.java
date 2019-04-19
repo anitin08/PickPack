@@ -43,7 +43,7 @@ public class RequestController {
   
       
     
-    @RequestMapping(value = "/searchByName", method = RequestMethod.GET)
+    @RequestMapping(value = "/searchByTrack", method = RequestMethod.GET)
     public ModelAndView createrequest2(@Valid @RequestParam("name") String name,@RequestParam("trackId") String trackingId,@RequestParam("id") long id) {
        // boolean a=RequestService.searchRecord(requestEntity);
     	RequestTable requestEntity=new RequestTable();
@@ -53,10 +53,23 @@ public class RequestController {
     	String returntrackid=RequestService.searchRecord(requestEntity);
     	//System.out.println("searchByName :: name :: "+name+" trackingId: "+trackingId+" id : "+id);
     	ModelAndView model=new ModelAndView("table","addrecordform",new RecordTable());
-    	model.addObject("returntrackid",returntrackid);
+    	//model.addObject("returntrackid",returntrackid);
     	model.addObject("recordlist", recordService.getAllRecord());
     	return model;
     }
+    
+    
+    @RequestMapping(value = "/addRemark", method = RequestMethod.GET)
+    public ModelAndView addrmrk(@Valid @RequestParam("id") long id,@RequestParam("remark") String remark) {
+       
+    	RequestService.addRemark(id,remark);
+    	
+    	ModelAndView model=new ModelAndView("table","addrecordform",new RecordTable());
+    	model.addObject("recordlist", recordService.getAllRecord());
+    	return model;
+    }
+    
+    
     
     
 }
