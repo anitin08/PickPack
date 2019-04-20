@@ -14,5 +14,9 @@ public interface LoginRepository extends JpaRepository<LoginTable, Long> {
 	
 	@Query("SELECT R FROM LoginTable R WHERE(R.username=?1 AND R.password=?2)")
 	LoginTable findByusernameAndpassword(String usrname,String password);
+	
+	
+	@Query("SELECT R FROM LoginTable R WHERE(R.username=?1)")
+	LoginTable findByusername(String usrname);
  
 }

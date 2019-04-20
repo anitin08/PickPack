@@ -86,6 +86,7 @@
 						<form:form action="/register" id="registerform" method="post" modelAttribute="logintable">
 							<div style="color:#00ff43"> ${sussesswritten}</div>
 							<div style="color:#ff5400"> ${wrongroot}</div>
+							<div style="color:#ff5400"> ${userexists}</div>
 	
 							<div class="col-md-12 mb-3">
 	                            <form:input path="username"  placeholder="Enter Username" class="form-control" required="true"/>

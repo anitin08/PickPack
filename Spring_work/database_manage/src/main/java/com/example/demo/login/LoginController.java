@@ -37,7 +37,7 @@ public class LoginController {
     @Autowired
     RecordTableService recordService;
     
-    @RequestMapping(value = {"/login","/table"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
 	public ModelAndView show() {
 		return new ModelAndView("login", "logintable", new LoginTable());
 	}

@@ -20,13 +20,22 @@ public class RegisterService {
     LoginRepository loginRepo;
  
  
-    public boolean register(LoginTable loginentity) {;
-    	if(loginentity.getSpecial().equals("abcdef"))
+    public int register(LoginTable loginentity) {;
+    	if(loginentity.getSpecial().equals("abcdef") && loginRepo.findByusername(loginentity.getUsername())==null)
     	{
     		loginRepo.save(loginentity);
-    		return true;
+    		return 1;
     	}
-    return false;
+    	else if(!(loginentity.getSpecial().equals("abcdef")))
+    	{
+    		return 2;
+    	}
+    	else if(loginRepo.findByusername(loginentity.getUsername())!=null)
+    	{
+    		return 3;
+    	}
+    	else
+    		return 4;
     }
     
  

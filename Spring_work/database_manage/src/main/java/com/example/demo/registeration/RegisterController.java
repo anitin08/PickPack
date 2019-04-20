@@ -42,16 +42,23 @@ public class RegisterController{
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ModelAndView processRequest(@ModelAttribute("logintable") LoginTable registerEntity) {
-    	ModelAndView model;
-    	if(registerService.register(registerEntity))
+    	ModelAndView model=null;
+    	int resul=registerService.register(registerEntity);
+    	if(resul==1)
     	{
     		model = new ModelAndView("register","logintable", new LoginTable());
    		 	model.addObject("sussesswritten","AddedSussessfully");
     	}
-    	else 
+    	else if(resul==2)
     	{
     		model = new ModelAndView("register","logintable", new LoginTable());
-   		 	model.addObject("wrongroot","Incorrect Root Password");
+   		 	model.addObject("wrongroot","Incorrect Root Password!");
+    		
+    	}
+    	else if(resul==3)
+    	{
+    		model = new ModelAndView("register","logintable", new LoginTable());
+   		 	model.addObject("userexists","Username Exists!");
     		
     	}
     	return model;
