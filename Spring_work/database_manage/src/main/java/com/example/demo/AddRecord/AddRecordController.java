@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  
  
 @RestController
@@ -34,14 +35,14 @@ public class AddRecordController {
     LoginController lc;
  
     @RequestMapping(value = "/createrecord", method = RequestMethod.POST)
-	public ModelAndView createaddrecord(@ModelAttribute("addrecordform") RecordTable recordEntity) {
+	public ModelAndView createaddrecord(@ModelAttribute("addrecordform") RecordTable recordEntity ,RedirectAttributes redir) {
     	
-    	ModelAndView model=new ModelAndView("table","addrecordform",new RecordTable());
+    	ModelAndView model=new ModelAndView("redirect:/table");
     	List<RecordTable>reslist=recordRepo.findBytracking_id(recordEntity.getTrack_id());
     	//System.out.println(reslist.size());
     	if(reslist.size()>0)
     	{
-    		model.addObject("ans", "Record Already Exists");
+    		redir.addFlashAttribute("ans", "Record Already Exists");
     		
     	}
     	else
@@ -50,8 +51,8 @@ public class AddRecordController {
     		
     	}
     	//System.out.println(lc.getAdminname());
-    	model.addObject("user", lc.getAdminname());
-    	model.addObject("recordlist", recordService.getAllRecord());
+    	//redir.addFlashAttribute("user", lc.getAdminname());
+    	//model.addObject("recordlist", recordService.getAllRecord());
     	return model;
     	
  

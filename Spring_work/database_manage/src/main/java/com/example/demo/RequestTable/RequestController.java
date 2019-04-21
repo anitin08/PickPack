@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.DataRecordTable.RecordTable;
 import com.example.demo.DataRecordTable.RecordTableService;
@@ -52,20 +53,25 @@ public class RequestController {
     	requestEntity.setTrackid(trackingId);
     	String returntrackid=RequestService.searchRecord(requestEntity);
     	//System.out.println("searchByName :: name :: "+name+" trackingId: "+trackingId+" id : "+id);
-    	ModelAndView model=new ModelAndView("table","addrecordform",new RecordTable());
+    	ModelAndView model=new ModelAndView("redirect:/table");
     	//model.addObject("returntrackid",returntrackid);
-    	model.addObject("recordlist", recordService.getAllRecord());
+    	//model.addObject("recordlist", recordService.getAllRecord());
     	return model;
     }
     
     
     @RequestMapping(value = "/addRemark", method = RequestMethod.GET)
-    public ModelAndView addrmrk(@Valid @RequestParam("id") long id,@RequestParam("remark") String remark) {
+    public ModelAndView addrmrk(@Valid @RequestParam("id") long id,@RequestParam("remark") String remark ,RedirectAttributes redir){
        
-    	RequestService.addRemark(id,remark);
+    	boolean r=RequestService.addRemark(id,remark);
     	
-    	ModelAndView model=new ModelAndView("table","addrecordform",new RecordTable());
-    	model.addObject("recordlist", recordService.getAllRecord());
+    	ModelAndView model=new ModelAndView("redirect:/table");
+    	if(!r)
+    	{
+    		redir.addFlashAttribute("noitem", "Item Number Not Found");
+    	}
+    		
+    	//model.addObject("recordlist", recordService.getAllRecord());
     	return model;
     }
     

@@ -19,14 +19,14 @@ public class LoginService {
     LoginRepository loginRepo;
  
  
-    public String validation(LoginTable loginentity) {
+    public boolean validation(LoginTable loginentity) {
     	
     	LoginTable result=loginRepo.findByusernameAndpassword(loginentity.username, loginentity.password);
     	if(result!=null)
     	{
-    		return result.username;
+    		return true;
     	}
-        return null;
+        return false;
     }
     
  

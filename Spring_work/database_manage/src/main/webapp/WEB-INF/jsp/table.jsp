@@ -49,13 +49,25 @@
         <ul class="navbar-nav">
 	        <li class="nav-item">
 	            <div class="nav-link js-scroll" id="latestuser" style="color: #0078ff " >
+	            
+	            
+	            
 	            <% 
-	            String username=request.getParameter("username");
-	     		if(username==null)
-	            username=(String)session.getAttribute("username");
-	            out.print("Welcome "+username);
-	            session.setAttribute("username",username);
+	            if (session != null) {
+	    			if (session.getAttribute("username") != null) {
+	    				String name = (String) session.getAttribute("username");
+	    				out.print("Welcome, " + name);
+	    			} else {
+	    				response.sendRedirect("/login");
+	    			}
+	    		}
+	            else {										//
+    				response.sendRedirect("/login");		//why it is not needed?
+    			}											//										
 	            %>
+	            
+	            
+	            
 	            </div>
           </li>
           <li>
@@ -75,9 +87,6 @@
 					    <th>Picked</th>
 					  </tr >
 					  
-					  
-					 
-	
 					 
 				</table>
 				
@@ -90,7 +99,8 @@
 			</div>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll active" href="${pageContext.request.contextPath}/login" style="color: #0078ff" >Logout</a>
+           <form action="/logout" method="get"> <button class="nav-link js-scroll active" type="submit" style="color: #0078ff; border: none;
+  background-color: inherit;" >Logout</button></form>
           </li>
           
         </ul>
@@ -122,10 +132,14 @@
 			  	</div>
         </div>
         	  
-
-
+		
 		<div class="dropdown">
-			 <button onclick="newenteryFunc()" class="dropbtn" style="width : 40px; text-align: center; border-radius: 50%;"><b>+</b></button>
+			<div class="row" style="margin-left: 5px">
+				<form action="/fulltable" method="get"><button class="dropbtn" type="submit"  style="width : 40px; text-align: center; border-radius: 50%;"><b>F</b></button></form>
+				<form action="/table" method="get"><button class="dropbtn" type="submit"  style="width : 40px; text-align: center; border-radius: 50%;"><b>H</b></button></form>
+				 <button onclick="newenteryFunc()" class="dropbtn" style="width : 40px; text-align: center; border-radius: 50%;"><b>+</b></button>
+			</div>
+			
 			  <div id="mynewentry" class="dropdown-content" style="background-color: #000000">
 
 				    <form:form action="/createrecord" method="post" role="form" modelAttribute="addrecordform" >
@@ -143,10 +157,11 @@
 
 			  </div>
 			  <div style="color:red"> ${ans}</div>
+			  <div style="color:red"> ${noitem}</div>
 		</div>
-			
 		
-	  
+			
+		 
         <div class="tb_search">
 
                <input type="text" id="search_input_all" onkeyup="FilterkeyWord_all_table()" placeholder="Search.." class="form-control">
@@ -263,7 +278,7 @@
                         //txt += "<tr><td><form action='/addRemark' method=get><input  type='number' name='id' style='width:70%' /><input  type='text' name='remark' style='width:70%' /><button type='submit' style='width:95px'><img src='./img/tick_mark_icon.png' width='25' height='25' /></button></form><td></tr>"
                    		
                         
-                        txt += "<tr><td colspan='4'><form action='/addRemark' method=get><input  type='number' placeholder='Item Number..' name='id' style='width:140px' /><input  type='text' name='remark' placeholder='Add Remark..' style='width:140px;margin-left: 2px' /><button type='submit' style='width:100px;margin-left: 2px'><img src='./img/tick_mark_icon.png' width='25' height='25' /></button></form><td></tr>" 
+                        txt += "<tr><td colspan='4'><form action='/addRemark' method=get><input  type='number' placeholder='Item Number..' name='id' style='width:140px' required='true' /><input  type='text' name='remark' placeholder='Add Remark..' style='width:140px;margin-left: 2px' /><button type='submit' style='width:100px;margin-left: 2px'><img src='./img/tick_mark_icon.png' width='25' height='25' /></button></form><td></tr>" 
           				//appending
                         $("#reqtab").append(txt);
                         
@@ -335,6 +350,32 @@
 	    	
 	    	
 	    }
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    function logmeout() {
+		    $.ajax({
+		    dataType: "json",
+		    method: "GET",
+		    url: '/logout',
+		    success: function (result) {
+
+			    	
+		    },
+		    error: function(jqXHR, textStatus, errorThrown) {
+	            alert(jqXHR.status + ' ' + jqXHR.responseText);
+	        }
+		    
+		  });
+		  } 
+	    
+	    
+	    
+
 	
 	</script>
 	

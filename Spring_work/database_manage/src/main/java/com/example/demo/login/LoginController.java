@@ -2,6 +2,7 @@ package com.example.demo.login;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
  
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,24 +14,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.DataRecordTable.RecordTable;
 import com.example.demo.DataRecordTable.RecordTableService;
+import com.example.demo.RequestTable.RequestTable;
  
  
 @RestController
 public class LoginController {
 	
-	private String adminname;
 	
-    public String getAdminname() {
-		return adminname;
-	}
-
-	public void setAdminname(String adminname) {
-		this.adminname = adminname;
-	}
-
+	
+   
 	@Autowired
     LoginService loginService;
  
@@ -38,28 +34,71 @@ public class LoginController {
     RecordTableService recordService;
     
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
-	public ModelAndView show() {
+	public ModelAndView loginpage() {
 		return new ModelAndView("login", "logintable", new LoginTable());
 	}
 
-    @RequestMapping(value = "/table", method = RequestMethod.POST)
-	public ModelAndView processRequest(@ModelAttribute("logintable") LoginTable loginEntity) {
+    @RequestMapping(value = {"/table"}, method = RequestMethod.GET)
+	public ModelAndView gettable() {
+    	ModelAndView model = new ModelAndView("table","addrecordform",new RecordTable());
+    	model.addObject("recordlist", recordService.getUnpickedRecord());
+    	return model;
+	}
+    
+    @RequestMapping(value = {"/fulltable"}, method = RequestMethod.GET)
+	public ModelAndView fulltable() {
+    	ModelAndView model = new ModelAndView("table","addrecordform",new RecordTable());
+    	model.addObject("recordlist", recordService.getAllRecord());
+    	return model;
+	}
+    
+    
+    @RequestMapping(value = {"/","/index"}, method = RequestMethod.GET)
+	public ModelAndView welcome() {
+		return new ModelAndView("index");
+	}
+    
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
+	public ModelAndView user() {
+		return new ModelAndView("user", "usertable", new RequestTable());
+	}
+    
+    
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+	public ModelAndView registerpage() {
+		return new ModelAndView("register", "logintable", new LoginTable());
+	}
+    
+    //----------------------------
+    
+    @RequestMapping(value = "/logincheck", method = RequestMethod.POST)
+	public ModelAndView processRequest(@ModelAttribute("logintable") LoginTable loginEntity ,RedirectAttributes redir ,HttpSession session) {
 		
-    	adminname=loginService.validation(loginEntity);
+    	Boolean adminname=loginService.validation(loginEntity);
     	//System.out.println(getAdminname());
     	ModelAndView model;
-    	if(adminname!=null)
+    	if(adminname)
     	{
-    		model = new ModelAndView("table","addrecordform",new RecordTable());
-    		model.addObject("user", adminname);
-    		model.addObject("recordlist", recordService.getAllRecord());
+    		model = new ModelAndView("redirect:/table");
+    		session.setAttribute("username", loginEntity.getUsername());
     	}
     	else
     	{
-    		model= new ModelAndView("login", "logintable", new LoginTable());
-    		model.addObject("nouser", "User Not Found");
+    		model= new ModelAndView("redirect:/login");
+    		redir.addFlashAttribute("nouser", "User Not Found");
     	}
 		return model;
 	}
+    
+    
+    @RequestMapping("/logout")
+    public ModelAndView logout(HttpSession session ,RedirectAttributes redir) {
+    	
+    	ModelAndView model;
+    	model= new ModelAndView("redirect:/login");
+    	redir.addFlashAttribute("successlogedout", "Sucessfully Loged Out!");
+        session.invalidate();
+       return model;
+    }
  
 }

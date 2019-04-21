@@ -53,13 +53,18 @@ public class RequestService {
     }
     
     
-    public void addRemark(long id,String remark)
+    public boolean addRemark(long id,String remark)
     {
-    	Optional<RecordTable>retob= recordRepo.findById(id);
-    	RecordTable rt=retob.get();
-    	rt.setStatus("Picked");
-    	rt.setRemark(remark);
-    	recordRepo.save(rt);
+    	Optional<RecordTable>retob= recordRepo.findById(id);    	
+    	if(retob.isPresent())
+    	{
+    		RecordTable rt=retob.get();
+    		rt.setStatus("Picked");
+        	rt.setRemark(remark);
+        	recordRepo.save(rt);
+        	return true;
+    	}
+    	return false;
     	//System.out.println(id+" "+remark);
     }
     

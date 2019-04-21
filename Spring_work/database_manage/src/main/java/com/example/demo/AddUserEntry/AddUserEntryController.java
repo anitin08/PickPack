@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  
  
 @RestController
@@ -32,15 +33,12 @@ public class AddUserEntryController {
 //    public RequestTable createRequest(@Valid @RequestBody RequestTable requestEntity) {
 //        return requestService.createRequest(requestEntity);
 //    }
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
-	public ModelAndView user() {
-		return new ModelAndView("user", "usertable", new RequestTable());
-	}
+    
     
      @RequestMapping(value = "/user", method = RequestMethod.POST)
-	public ModelAndView processRequest(@ModelAttribute("usertable") RequestTable requestEntity) {
+	public ModelAndView processRequest(@ModelAttribute("usertable") RequestTable requestEntity,RedirectAttributes redir) {
     	ModelAndView model;
-    	model=new ModelAndView("user", "usertable", new RequestTable());
+    	model=new ModelAndView("redirect:/user");
     	
     	
     	List<RecordTable>reslist=recordRepo.findBytracking_id(requestEntity.getTrackid());
@@ -48,11 +46,11 @@ public class AddUserEntryController {
     	if(reslist.size()>0)
     	{
     		String a=requestService.createRequest(requestEntity);
-        	model.addObject("success","Successfully Requested "+ a +"'s Entry");
+    		redir.addFlashAttribute("success","Successfully Requested "+ a +"'s Entry");
     	}
     	else
     	{
-    		model.addObject("failure","Order Not Recieved Yet!");
+    		redir.addFlashAttribute("failure","Order Not Recieved Yet!");
     	}
     	
     	

@@ -89,16 +89,16 @@
 							<div style="color:#ff5400"> ${userexists}</div>
 	
 							<div class="col-md-12 mb-3">
-	                            <form:input path="username"  placeholder="Enter Username" class="form-control" required="true"/>
+	                            <form:input path="username" type="text" placeholder="Enter Username" class="form-control" required="true"/>
 	                        </div>
 	                        
 	                        <div class="col-md-12 mb-3">
-	                            <form:input path="password" placeholder="Enter Password" class="form-control" data-rule="minlen:8" data-msg="Please enter at least 8 chars of password" required="true"/>
+	                            <form:input path="password" type="password" placeholder="Enter Password" class="form-control" data-rule="minlen:8" data-msg="Please enter at least 8 chars of password" required="true"/>
 								<div class="validation"></div>
 	                        </div>
 	                        
 	                        <div class="col-md-12 mb-3">
-	                            <form:input path="special" placeholder="Enter Root Password" class="form-control" required="true"/>
+	                            <form:input path="special"  type="password" placeholder="Enter Root Password" class="form-control" required="true"/>
 	                        </div>
 	                        <div class="col-md-12 mb-3">
 	                            <input class="button button-a button-fixsize button-rouded" type="submit" value="signup" />

@@ -67,7 +67,32 @@
   <div id="home" class="intro route bg-image" style="background-image: url(img/intro-bg.jpg)">
     <div class="overlay-itro"></div>
 
-
+		
+		
+		
+		
+			<% 
+	            if (session != null) {
+	    			if (session.getAttribute("username") != null) {
+	    				response.sendRedirect("/table");
+	    			} 
+	    		}
+	            							
+	       	%>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 
 
@@ -84,16 +109,17 @@
                   <div>
                   
                   
-                       <form:form action="/table" id="loginform" method="post" modelAttribute="logintable">
+                       <form:form action="/logincheck" id="loginform" method="post" modelAttribute="logintable">
 							
 							
 							<div style="color:#ff5400"> ${nouser}</div>
+							<div style="color:#00ff43"> ${successlogedout}</div>
 							<div class="col-md-12 mb-3">
-                            	<form:input path="username" name="username" placeholder="Enter Username" class="form-control" required="true"/>
+                            	<form:input path="username" type="text" name="username" placeholder="Enter Username" class="form-control" required="true"/>
 	                        </div>
 	                        
 	                        <div class="col-md-12 mb-3">
-	                            <form:input path="password" placeholder="Enter Password" class="form-control" data-rule="minlen:8" data-msg="Please enter at least 8 chars of password" required="true"/>
+	                            <form:input path="password" type="password" placeholder="Enter Password" class="form-control" data-rule="minlen:8" data-msg="Please enter at least 8 chars of password" required="true"/>
 								<div class="validation"></div>
 	                        </div>
 	                        <div class="col-md-12 mb-3">

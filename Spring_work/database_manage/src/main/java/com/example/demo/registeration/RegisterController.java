@@ -29,16 +29,10 @@ public class RegisterController{
     @Autowired
     RegisterService registerService;
     
-    @RequestMapping(value = {"/","/index"}, method = RequestMethod.GET)
-	public ModelAndView welcome() {
-		return new ModelAndView("index");
-	}
+    
     
       
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
-	public ModelAndView show() {
-		return new ModelAndView("register", "logintable", new LoginTable());
-	}
+    
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ModelAndView processRequest(@ModelAttribute("logintable") LoginTable registerEntity) {
