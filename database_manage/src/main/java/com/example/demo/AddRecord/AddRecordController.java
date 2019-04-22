@@ -25,6 +25,8 @@ public class AddRecordController {
     @Autowired
     AddRecordService addrecordService;
     
+    
+    
     @Autowired
     RecordTableService recordService;
     
