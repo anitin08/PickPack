@@ -19,5 +19,10 @@ public class RecordTableService {
     public List<RecordTable> getAllRecord() {
         return (List<RecordTable>) recordRepo.findAll();
     }
+    
+    
+    public List<RecordTable> getUnpickedRecord() {
+        return (List<RecordTable>) recordRepo.findUnpicked();
+    }
  
 }

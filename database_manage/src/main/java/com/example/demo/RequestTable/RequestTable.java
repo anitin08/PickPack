@@ -15,7 +15,7 @@ public class RequestTable {
 	@Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long Id;
+    long Id;
  
 	@NotNull
     @Column(name = "Name")
@@ -33,11 +33,11 @@ public class RequestTable {
 		this.trackid = track_id;
 	}
 
-	public Long getId() {
+	public long getId() {
 		return Id;
 	}
 	
-	public void setId(Long id) {
+	public void setId(long id) {
 		Id = id;
 	}
 	

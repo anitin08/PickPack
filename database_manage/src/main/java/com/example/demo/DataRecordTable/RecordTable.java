@@ -35,12 +35,23 @@ public class RecordTable {
     @Column(name = "Company_Name")
     String comp_name;
     
+    @Column(name = "remark")
+    String remark;
     
-    @Column(name = "Status")
+    public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	@Column(name = "Status")
     String status;
  
     @Column(name = "Date")
     Date date;
+    
     @PrePersist
     void onCreate()
     {

@@ -24,53 +24,50 @@ public class RequestService {
         return (List<RequestTable>) requestRepo.findAll();
     }
  
-    public boolean searchRecord(RequestTable requestEntity) {
+    public String searchRecord(RequestTable requestEntity) {
     	
     
     	                 //SEARCH IN RECORD REPO ON THE BASIS OF request entity
     	
-    	List<RecordTable>result=recordRepo.findBytracking_idAndname(requestEntity.trackid, requestEntity.name);
+    	List<RecordTable>result=recordRepo.findBytracking_id(requestEntity.trackid);
     	if(result.size()>0)
     	{
+    		String returntrackid=null;
     		while(result.size()!=0)
     		{
     			RecordTable temp=result.remove(0);
     			temp.setStatus("Picked");
+    			//temp.setPickedTime(new Date())
     			//temp.getItem_no()
+    			returntrackid=temp.getTrack_id();   ////this tid should be sent to ajax call
     			recordRepo.save(temp);
     		}
     		requestRepo.delete(requestEntity);
-    		return true;
+    		return returntrackid;
     	 
     		
     	}
     	
 
-    	return false;
+    	return null;
     }
+    
+    
+    public boolean addRemark(long id,String remark)
+    {
+    	Optional<RecordTable>retob= recordRepo.findById(id);    	
+    	if(retob.isPresent())
+    	{
+    		RecordTable rt=retob.get();
+    		rt.setStatus("Picked");
+        	rt.setRemark(remark);
+        	recordRepo.save(rt);
+        	return true;
+    	}
+    	return false;
+    	//System.out.println(id+" "+remark);
+    }
+    
+    
  
-    /*public RequestTable updateRequest(Long Id, RequestTable requestEntity) {
-        RequestTable updatedRequest;
-        Optional<RequestTable> searchEntity = requestRepo.findById(Id);
-        if (searchEntity.isPresent()) {
-            RequestTable Request = searchEntity.get();
-            Request.setTrackid(requestEntity.getTrackid());
-            Request.setName(requestEntity.getName());
-            updatedRequest = requestRepo.save(Request);
-        } else {
-            throw new EntityNotFoundException();
-        }
-        return updatedRequest;
-    }*/
- 
-    /*public ResponseEntity<Object> deleteRequest(Long Id) {
-        Optional<RequestTable> requestEntity = requestRepo.findById(Id);
-        if (requestEntity.isPresent()) {
-            RequestTable Request = requestEntity.get();
-            requestRepo.delete(Request);
-        } else {
-            throw new EntityNotFoundException();
-        }
-        return ResponseEntity.ok().build();
-    }*/
 }

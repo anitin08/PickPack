@@ -21,8 +21,9 @@ public class AddUserEntryService {
         return (List<SampleTable>) sampleRepo.findAll();
     }*/
  
-    public RequestTable createRequest(RequestTable requestEntity) {
-        return requestRepo.save(requestEntity);
+    public String createRequest(RequestTable requestEntity) {
+        RequestTable r= requestRepo.save(requestEntity);
+        return r.getName();
     }
  
    /* public SampleTable updateSample(Long Id, SampleTable sampleEntity) {
