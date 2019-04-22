@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class DatabaseManageApplication extends SpringBootServletInitializer {
 	
 
+	
 	public static void main(String[] args) {
 		SpringApplication.run(DatabaseManageApplication.class, args);
 	}

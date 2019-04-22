@@ -33,6 +33,7 @@ public class AddRecordController {
     
     @Autowired
     LoginController lc;
+    
  
     @RequestMapping(value = "/createrecord", method = RequestMethod.POST)
 	public ModelAndView createaddrecord(@ModelAttribute("addrecordform") RecordTable recordEntity ,RedirectAttributes redir) {
