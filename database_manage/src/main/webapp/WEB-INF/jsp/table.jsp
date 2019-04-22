@@ -156,7 +156,10 @@
 	                </form:form>
 
 
+<<<<<<< HEAD:database_manage/src/main/webapp/WEB-INF/jsp/table.jsp
 
+=======
+>>>>>>> a5ea880e286e5dfe58b3013224b1843a24bf7a5f:database_manage/src/main/webapp/WEB-INF/jsp/table.jsp
 			  </div>
 			  <div style="color:red"> ${ans}</div>
 			  <div style="color:red"> ${noitem}</div>
