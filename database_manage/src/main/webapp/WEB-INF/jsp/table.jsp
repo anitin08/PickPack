@@ -135,7 +135,7 @@
 		
 		<div class="dropdown">
 			<div class="row" style="margin-left: 5px">
-				<form action="/fulltable" method="get"><button class="dropbtn" type="submit"  style="width : 40px; text-align: center; border-radius: 50%;"><b>U+P</b></button></form>
+				<form action="/fulltable" method="get"><button class="dropbtn" type="submit"  style="width : 40px; text-align: center; border-radius: 50%;"><b>F</b></button></form>
 				<form action="/table" method="get"><button class="dropbtn" type="submit"  style="width : 40px; text-align: center; border-radius: 50%;"><b>U</b></button></form>
 				 <button onclick="newenteryFunc()" class="dropbtn" style="width : 40px; text-align: center; border-radius: 50%;"><b>+</b></button>
 			</div>
@@ -156,10 +156,7 @@
 	                </form:form>
 
 
-<<<<<<< HEAD:database_manage/src/main/webapp/WEB-INF/jsp/table.jsp
 
-=======
->>>>>>> a5ea880e286e5dfe58b3013224b1843a24bf7a5f:database_manage/src/main/webapp/WEB-INF/jsp/table.jsp
 			  </div>
 			  <div style="color:red"> ${ans}</div>
 			  <div style="color:red"> ${noitem}</div>
